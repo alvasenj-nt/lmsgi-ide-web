@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Laboratorio web LMSGI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="css/ide.css?v=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/xml-fold.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closetag.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchtags.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="lib/html-validate.min.js?v=1"></script>
+  <script src="lib/csstree.min.js?v=1"></script>
+</head>
+<body>
+  <header class="barra-menu">
+    <span class="marca">Laboratorio web LMSGI</span>
+    <span class="subtitulo"></span>
+  </header>
+
+  <nav class="barra-herramientas" aria-label="Acciones">
+    <button id="btn-vista" class="btn btn-principal" disabled title="Actualizar la vista previa (Ctrl+S)"><span class="icono-vista"></span>Vista previa</button>
+    <button id="btn-comprobar" class="btn" disabled>Comprobar</button>
+    <button id="btn-copiar-codigo" class="btn" disabled>Copiar código</button>
+    <span class="separador solo-profesor"></span>
+    <button id="btn-diagnostico" class="btn solo-profesor" title="Batería automática de pruebas del entorno">Diagnóstico automático</button>
+    <span class="separador"></span>
+    <button id="btn-descargar" class="btn solo-zip" title="Descargar los archivos del proyecto en un .zip">Descargar entrega</button>
+    <button id="btn-plantilla" class="btn" title="Volver al contenido inicial del archivo abierto">Restaurar plantilla</button>
+    <button id="btn-reiniciar" class="btn" title="Recargar la página conservando el código">Reiniciar entorno</button>
+    <button id="btn-pantalla-completa" class="btn" hidden title="Ampliar el laboratorio a toda la pantalla">Pantalla completa</button>
+  </nav>
+
+  <main class="espacio">
+    <aside class="vista explorador">
+      <div class="vista-titulo">Explorador</div>
+      <ul class="arbol"></ul>
+    </aside>
+
+    <section class="vista editor">
+      <div class="pestanas-editor" id="pestana-editor"></div>
+      <div id="contenedor-editor"></div>
+      <div id="visor-binario" class="visor-binario" hidden></div>
+    </section>
+
+    <section class="vista previa">
+      <div class="previa-barra">
+        <button id="btn-atras" class="btn-icono" title="Volver a la página anterior" disabled>&#8592;</button>
+        <span id="previa-ruta" class="previa-ruta">Vista previa</span>
+        <label class="previa-ancho">Ancho
+          <select id="previa-ancho">
+            <option value="0">Ajustar al panel</option>
+            <option value="1200">Escritorio (1200 px)</option>
+            <option value="768">Tableta (768 px)</option>
+            <option value="375">Móvil (375 px)</option>
+          </select>
+        </label>
+      </div>
+      <div class="previa-lienzo" id="previa-lienzo">
+        <iframe id="marco-vista" title="Vista previa de la página" sandbox="allow-same-origin allow-scripts allow-forms allow-modals"></iframe>
+      </div>
+    </section>
+
+    <section class="vista panel-inferior">
+      <div class="pestanas" role="tablist">
+        <button class="pestana" data-panel="problemas" role="tab">Problemas <span id="contador-problemas"></span></button>
+        <button class="pestana" data-panel="comprobaciones" role="tab">Comprobaciones <span id="contador-comprobaciones"></span></button>
+        <button class="pestana solo-profesor" data-panel="diagnostico" role="tab">Diagnóstico</button>
+      </div>
+
+      <div class="contenido-panel" id="panel-problemas">
+        <table class="tabla-problemas">
+          <thead><tr><th>Descripción</th><th>Archivo</th><th>Línea</th></tr></thead>
+          <tbody id="lista-problemas"></tbody>
+        </table>
+        <p id="sin-problemas" class="nota-panel">No hay problemas en los archivos del ejercicio abierto.</p>
+      </div>
+
+      <div class="contenido-panel" id="panel-comprobaciones">
+        <p id="nota-comprobaciones" class="nota-panel">Este ejercicio no tiene comprobaciones automáticas.</p>
+        <ul id="lista-comprobaciones" class="lista-comprobaciones"></ul>
+      </div>
+
+      <div class="contenido-panel solo-profesor" id="panel-diagnostico">
+        <div class="diag-cabecera">
+          <button id="btn-copiar" class="btn">Copiar informe</button>
+        </div>
+        <table class="tabla-diag">
+          <thead><tr><th>Prueba</th><th>Resultado</th><th>Valoración</th></tr></thead>
+          <tbody id="lista-diag"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Marco fuera de la pantalla donde se ejecutan las comprobaciones -->
+  <iframe id="marco-comprobaciones" class="marco-oculto" title="Comprobaciones" aria-hidden="true" tabindex="-1"></iframe>
+
+  <footer class="barra-estado">
+    <span id="estado">Cargando el laboratorio...</span>
+    <span id="cronometro"></span>
+  </footer>
+
+  <script src="js/validacion.js?v=1"></script>
+  <script src="js/comprobaciones.js?v=1"></script>
+  <script src="js/app.js?v=1"></script>
+</body>
+</html>

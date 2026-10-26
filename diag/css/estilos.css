@@ -1,0 +1,6 @@
+h1 { color: #8e44ad; }
+.cajas { display: flex; gap: 8px; }
+.caja { flex: 1; padding: 8px; border: 1px solid #8e44ad; }
+@media (max-width: 600px) {
+    .cajas { flex-direction: column; }
+}
