@@ -26,7 +26,12 @@ Cómo trabajar
    - La vista Problemas, abajo, muestra los errores de validación con su
      línea. Haz clic en un error para ir a él.
 
-5. Entrega: con index.html abierto, pulsa "Copiar código" y pégalo en la
+5. Cuando creas que has terminado, pulsa Comprobar. La vista
+   Comprobaciones marca cada requisito como "Cumple" o "Pendiente". Que se
+   cumplan todos no garantiza la nota máxima: la corrección revisa más
+   detalles, como que los textos sean exactamente los de textos.txt.
+
+6. Entrega: con index.html abierto, pulsa "Copiar código" y pégalo en la
    pregunta del cuestionario, debajo del laboratorio.
    - Hazlo cada 10 minutos, no solo al final: si el entorno se cierra, lo
      que ya esté en el cuestionario no se pierde.

@@ -1,7 +1,7 @@
 {
   "esquema": 1,
   "id": "lmsgi-ut2-simulacro-primera-pagina",
-  "version": 1,
+  "version": 2,
   "titulo": "UT2 · Simulacro: la primera página",
   "proyecto": "baroja-digital",
   "readme": "README.txt",
@@ -9,10 +9,18 @@
     {
       "carpeta": "ejercicio1",
       "inicio": "index.html",
+      "comprobaciones": "comprobaciones.json",
       "archivos": [
-        { "nombre": "enunciado.txt" },
-        { "nombre": "textos.txt" },
-        { "nombre": "index.html", "editable": true }
+        {
+          "nombre": "enunciado.txt"
+        },
+        {
+          "nombre": "textos.txt"
+        },
+        {
+          "nombre": "index.html",
+          "editable": true
+        }
       ]
     }
   ]

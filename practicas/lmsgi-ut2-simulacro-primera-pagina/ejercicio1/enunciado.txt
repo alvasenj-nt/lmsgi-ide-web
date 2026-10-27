@@ -25,6 +25,8 @@ Requisitos
 Puedes generar el esqueleto con el atajo de Emmet (! y Tab), pero revisa
 línea a línea lo que genera y corrige lo que no cumpla los requisitos.
 
+Cuando termines, pulsa Comprobar y revisa la lista.
+
 Archivos
 --------
 
