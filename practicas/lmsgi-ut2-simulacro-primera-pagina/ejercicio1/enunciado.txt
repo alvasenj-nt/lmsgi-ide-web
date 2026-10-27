@@ -1,0 +1,32 @@
+EJERCICIO 1: la primera página de la redacción
+==============================================
+
+Contexto
+--------
+
+El servidor de El Baroja Digital se ha borrado y la redacción empieza a
+reconstruir el periódico. El primer encargo es la portada, todavía casi
+vacía: solo el nombre del periódico y su lema.
+
+Requisitos
+----------
+
+- index.html tiene la estructura completa de un documento HTML5.
+- La página está en español, muestra bien las tildes y la eñe, y se adapta
+  al ancho del móvil.
+- Tiene el título de pestaña y la descripción para buscadores de
+  textos.txt.
+- Justo después de la línea del tipo de documento hay un comentario HTML
+  con tu nombre y la fecha de hoy.
+- En la parte visible solo aparecen el nombre del periódico, como título
+  principal de la página, y el lema, como párrafo.
+- La vista Problemas no muestra ningún error.
+
+Puedes generar el esqueleto con el atajo de Emmet (! y Tab), pero revisa
+línea a línea lo que genera y corrige lo que no cumpla los requisitos.
+
+Archivos
+--------
+
+  index.html   La página que tienes que escribir. Está vacía.
+  textos.txt   Los textos de la página (solo lectura).

@@ -1,0 +1,12 @@
+TEXTOS DE LA PORTADA
+(copia del apartado 1 del kit de redacción de El Baroja Digital)
+
+Nombre del periódico: El Baroja Digital
+
+Lema: Diario de la comunidad del IES Pío Baroja desde 1999
+
+Título para la pestaña del navegador:
+El Baroja Digital | Diario de la comunidad del IES Pío Baroja
+
+Descripción para los buscadores:
+Noticias del IES Pío Baroja: tecnología, ciberseguridad, vida en el centro, deportes y opinión.
