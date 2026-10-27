@@ -127,6 +127,12 @@ async function probarPractica(navegador, id) {
       return d && d.contentType === 'text/html' && !/^404$/.test(d.title);
     });
     comprobar(id, ej.carpeta + ': la página de inicio se sirve', servida);
+    const vistas = await p.evaluate(() => estado.metricas.vistas);
+    await p.click('#btn-recargar');
+    await pausa(1000);
+    const recarga = await p.evaluate(() => ({ vistas: estado.metricas.vistas, ruta: document.getElementById('previa-ruta').textContent }));
+    comprobar(id, ej.carpeta + ': el botón de recargar vuelve a cargar la vista previa',
+      recarga.vistas > vistas && recarga.ruta === inicio, recarga.ruta);
 
     // Atajo de Emmet en el primer archivo HTML editable de la práctica
     const html = ej.archivos.find((a) => a.editable && /\.html?$/.test(a.nombre));

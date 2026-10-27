@@ -66,14 +66,6 @@ body {
 .btn:hover:not(:disabled) { background: var(--acento-suave); border-color: var(--acento); }
 .btn:disabled { opacity: .5; cursor: default; }
 .btn[hidden] { display: none; }
-.btn-principal { font-weight: 600; }
-
-.icono-vista {
-  width: 0; height: 0;
-  border-left: 9px solid var(--acento);
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-}
 
 .espacio {
   display: grid;

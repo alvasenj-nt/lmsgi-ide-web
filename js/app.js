@@ -118,7 +118,7 @@ const carpetaActiva = () => carpetaDe(estado.activo) || estado.vista.carpeta;
 function actualizarBotones() {
   const carpeta = carpetaActiva();
   const ej = carpeta && PRACTICA ? ejercicioDe(carpeta) : null;
-  $('btn-vista').disabled = !estado.listo || !ej;
+  $('btn-recargar').disabled = !estado.listo || !ej;
   $('btn-comprobar').disabled = estado.ocupado || !estado.listo || !ej || !ej.comprobaciones;
   $('btn-comprobar').title = ej && ej.comprobaciones
     ? 'Comprobar los requisitos de ' + carpeta
@@ -1027,7 +1027,9 @@ function restaurarPlantilla() {
 
 function enlazarUI() {
   document.querySelectorAll('.pestana').forEach((p) => p.addEventListener('click', () => mostrarPanel(p.dataset.panel)));
-  $('btn-vista').addEventListener('click', () => {
+  // La vista previa se actualiza sola al escribir; el botón de la barra de
+  // la vista previa la recarga a mano, como el de un navegador
+  $('btn-recargar').addEventListener('click', () => {
     if (!estado.vista.carpeta && carpetaActiva()) estado.vista.carpeta = carpetaActiva();
     actualizarVista();
   });
@@ -1057,7 +1059,7 @@ function enlazarUI() {
   document.addEventListener('keydown', (ev) => {
     if (ev.ctrlKey && (ev.key === 's' || ev.key === 'S')) {
       ev.preventDefault();
-      if (!$('btn-vista').disabled) actualizarVista();
+      if (!$('btn-recargar').disabled) actualizarVista();
       setEstado('Guardado automático activo: la vista previa se actualiza sola al escribir.');
     }
   });

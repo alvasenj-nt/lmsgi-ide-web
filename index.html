@@ -6,7 +6,7 @@
   <link rel="icon" href="data:,">
   <title>Laboratorio web LMSGI</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-  <link rel="stylesheet" href="css/ide.css?v=1">
+  <link rel="stylesheet" href="css/ide.css?v=2">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
@@ -30,7 +30,6 @@
   </header>
 
   <nav class="barra-herramientas" aria-label="Acciones">
-    <button id="btn-vista" class="btn btn-principal" disabled title="Actualizar la vista previa (Ctrl+S)"><span class="icono-vista"></span>Vista previa</button>
     <button id="btn-comprobar" class="btn" disabled>Comprobar</button>
     <button id="btn-copiar-codigo" class="btn" disabled>Copiar código</button>
     <span class="separador solo-profesor"></span>
@@ -57,6 +56,7 @@
     <section class="vista previa">
       <div class="previa-barra">
         <button id="btn-atras" class="btn-icono" title="Volver a la página anterior" disabled>&#8592;</button>
+        <button id="btn-recargar" class="btn-icono" title="Recargar la vista previa (Ctrl+S)" disabled>&#8635;</button>
         <span id="previa-ruta" class="previa-ruta">Vista previa</span>
         <label class="previa-ancho">Ancho
           <select id="previa-ancho">
@@ -114,6 +114,6 @@
 
   <script src="js/validacion.js?v=1"></script>
   <script src="js/comprobaciones.js?v=1"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>
