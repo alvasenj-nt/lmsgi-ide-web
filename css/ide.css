@@ -256,3 +256,73 @@ body:not(.entrega-zip) .solo-zip { display: none !important; }
 .CodeMirror-gutters { background: #fff; border-right: 0; }
 .CodeMirror-linenumber { color: #6e7681; }
 .CodeMirror-activeline-background { background: #f5f5f5; }
+
+/* ---------- Tema VS Code (Dark Modern) ----------
+   Interfaz y coloreado de HTML y CSS como el tema oscuro por defecto de
+   Visual Studio Code. El acento sigue siendo el morado del módulo. La vista
+   previa conserva sus colores reales: es la página del alumno. */
+:root {
+  --fondo: #181818;
+  --fondo-vista: #1f1f1f;
+  --borde: #2b2b2b;
+  --texto: #cccccc;
+  --texto-suave: #9d9d9d;
+  --error: #f14c4c;
+  --error-suave: rgba(241, 76, 76, .16);
+  --aviso: #cca700;
+  --aviso-suave: rgba(204, 167, 0, .14);
+  --bien: #89d185;
+  --acento-suave: rgba(142, 68, 173, .3);
+  --mono: Consolas, "Cascadia Code", "DejaVu Sans Mono", "Courier New", monospace;
+  color-scheme: dark;
+}
+.barra-menu { background: #181818; }
+.marca { color: #e0e0e0; }
+.barra-herramientas { background: #1f1f1f; }
+.btn { color: #cccccc; background: #313131; border-color: #3c3c3c; border-radius: 4px; }
+.btn:hover:not(:disabled) { background: #3c3c3c; border-color: var(--acento); }
+.explorador { background: #181818; }
+.vista-titulo, .previa-barra { background: #181818; }
+.pestanas-editor { background: #1f1f1f; color: #ffffff; font-weight: 400; border-top: 1px solid var(--acento); }
+.archivo:hover { background: #2a2d2e; }
+.archivo.activo { background: #37373d; }
+.aviso-practica { background: #252526; color: var(--texto); }
+.visor-binario { background: #1f1f1f; }
+.previa-ancho select { background: #313131; color: var(--texto); border: 1px solid #3c3c3c; }
+.btn-icono { color: var(--texto); }
+.previa-lienzo.con-ancho { background: #2b2b2b; }
+.pestanas { background: #181818; }
+.pestana { color: var(--texto-suave); border-right: 0; text-transform: uppercase; font-size: 11px; letter-spacing: .04em; }
+.pestana.activa { background: transparent; color: #e7e7e7; border-top: 0; border-bottom: 1px solid var(--acento); font-weight: 400; }
+.contenido-panel { background: #181818; }
+th { background: #252526; color: var(--texto-suave); }
+th, td { border-bottom-color: var(--borde); }
+.tabla-problemas tbody tr:hover td { background: #2a2d2e; }
+.lista-comprobaciones li { border-bottom-color: var(--borde); }
+.lista-comprobaciones li::before { background: #555; }
+
+/* Editor: colores de HTML y CSS del tema Dark+ */
+.cm-s-vscode.CodeMirror { background: #1f1f1f; color: #cccccc; }
+.cm-s-vscode .CodeMirror-gutters { background: #1f1f1f; border-right: 0; }
+.cm-s-vscode .CodeMirror-linenumber { color: #6e7681; }
+.cm-s-vscode .CodeMirror-activeline-background { background: #282828; }
+.cm-s-vscode .CodeMirror-activeline .CodeMirror-linenumber { color: #cccccc; }
+.cm-s-vscode .CodeMirror-cursor { border-left: 2px solid #aeafad; }
+.cm-s-vscode div.CodeMirror-selected,
+.cm-s-vscode.CodeMirror-focused div.CodeMirror-selected { background: #264f78; }
+.cm-s-vscode .CodeMirror-matchingbracket { color: inherit !important; outline: 1px solid #888; }
+.cm-s-vscode .CodeMirror-matchingtag { background: rgba(142, 68, 173, .3); }
+.cm-s-vscode .cm-tag { color: #569cd6; }
+.cm-s-vscode .cm-bracket { color: #808080; }
+.cm-s-vscode .cm-attribute { color: #9cdcfe; }
+.cm-s-vscode .cm-string { color: #ce9178; }
+.cm-s-vscode .cm-string-2 { color: #ce9178; }
+.cm-s-vscode .cm-comment { color: #6a9955; }
+.cm-s-vscode .cm-meta { color: #569cd6; }
+.cm-s-vscode .cm-qualifier, .cm-s-vscode .cm-builtin { color: #d7ba7d; }
+.cm-s-vscode .cm-property { color: #9cdcfe; }
+.cm-s-vscode .cm-atom, .cm-s-vscode .cm-keyword { color: #ce9178; }
+.cm-s-vscode .cm-number { color: #b5cea8; }
+.cm-s-vscode .cm-variable, .cm-s-vscode .cm-variable-2, .cm-s-vscode .cm-variable-3 { color: #9cdcfe; }
+.cm-s-vscode .cm-def { color: #dcdcaa; }
+.cm-s-vscode .cm-error { color: #f44747; background: none; }

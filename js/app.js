@@ -274,7 +274,7 @@ function crearEditor() {
   if (ultimo && ARCHIVOS[ultimo]) estado.activo = ultimo;
   editor = CodeMirror($('contenedor-editor'), {
     value: '',
-    theme: 'default',
+    theme: 'vscode',
     lineNumbers: true,
     indentUnit: 4,
     tabSize: 4,
