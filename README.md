@@ -2,7 +2,7 @@
 
 Entorno de trabajo en el navegador, sin servidor, para prácticas y exámenes de HTML y CSS de Lenguajes de marcas y sistemas de gestión de información (1º DAM, IES Pío Baroja). Es el equivalente del [laboratorio Java de PSP](https://github.com/alvasenj-nt/psp-ide-web) y comparte su formato: se incrusta en un cuestionario de Moodle con Safe Exam Browser y el alumnado entrega pegando su código en preguntas de ensayo.
 
-- Explorador de archivos y editor con los colores de Visual Studio Code (cierre automático de etiquetas, `Ctrl+/` para comentar).
+- Explorador de archivos y editor con los colores de Visual Studio Code (cierre automático de etiquetas, `Ctrl+/` para comentar). En un archivo HTML, `!` o `html:5` seguido de Tab genera el esqueleto del documento igual que Emmet en VS Code, con `lang="en"` y `<title>Document</title>`, que el alumnado tiene que revisar.
 - Vista previa que funciona como Live Server: un service worker (`sw.js`) sirve el código del editor y los archivos de la práctica, así que las rutas relativas, los enlaces entre páginas, las hojas de estilo enlazadas, el vídeo y sus subtítulos funcionan igual que en un servidor. Las rutas distinguen mayúsculas de minúsculas, como en GitHub Pages. Se actualiza sola al escribir y simula anchos de escritorio, tableta y móvil.
 - Vista Problemas con la validación de HTML ([html-validate](https://html-validate.org)), CSS ([css-tree](https://github.com/csstree/csstree)) y XML (analizador del navegador), con mensajes en castellano y su línea.
 - Comprobaciones visibles opcionales por ejercicio (botón Comprobar): requisitos que el alumnado puede verificar antes de entregar. La corrección se hace con más comprobaciones, ocultas, ejecutadas con el mismo motor (`js/comprobaciones.js`).

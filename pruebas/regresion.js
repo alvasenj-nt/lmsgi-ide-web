@@ -101,6 +101,7 @@ async function abrir(navegador, url) {
 }
 
 const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
+const emmetProbado = new Set();
 
 async function probarPractica(navegador, id) {
   console.log('\n=== ' + id + ' ===');
@@ -126,6 +127,22 @@ async function probarPractica(navegador, id) {
       return d && d.contentType === 'text/html' && !/^404$/.test(d.title);
     });
     comprobar(id, ej.carpeta + ': la página de inicio se sirve', servida);
+
+    // Atajo de Emmet en el primer archivo HTML editable de la práctica
+    const html = ej.archivos.find((a) => a.editable && /\.html?$/.test(a.nombre));
+    if (html && !emmetProbado.has(id)) {
+      emmetProbado.add(id);
+      await p.click(`.archivo[data-archivo="${ej.carpeta + '/' + html.nombre}"]`);
+      const original = await p.evaluate(() => editor.getValue());
+      await p.evaluate(() => { editor.setValue('!'); editor.setCursor({ line: 0, ch: 1 }); editor.focus(); });
+      await p.keyboard.press('Tab');
+      const r = await p.evaluate(() => ({ texto: editor.getValue(), cursor: editor.getCursor() }));
+      comprobar(id, ej.carpeta + ': ! + Tab genera el esqueleto de Emmet',
+        r.texto.startsWith('<!DOCTYPE html>\n<html lang="en">') && r.texto.includes('<title>Document</title>')
+          && r.cursor.line === 8 && r.cursor.ch === 4, JSON.stringify(r.cursor));
+      await p.evaluate((t) => editor.setValue(t), original);
+      await p.click(`.archivo[data-archivo="${inicio}"]`);
+    }
     await pausa(1200);
     const problemas = await p.$eval('#contador-problemas', (e) => e.textContent);
     console.log('        problemas en la plantilla: ' + (problemas || 'ninguno'));

@@ -286,7 +286,11 @@ function crearEditor() {
     lineWrapping: false,
     gutters: ['marcas', 'CodeMirror-linenumbers'],
     extraKeys: {
-      Tab: (cm) => (cm.somethingSelected() ? cm.indentSelection('add') : cm.replaceSelection('    ')),
+      Tab: (cm) => {
+        if (expandirEmmet(cm)) return;
+        if (cm.somethingSelected()) cm.indentSelection('add');
+        else cm.replaceSelection('    ');
+      },
       'Shift-Tab': (cm) => cm.indentSelection('subtract'),
       'Ctrl-/': (cm) => cm.toggleComment(),
     },
@@ -297,6 +301,36 @@ function crearEditor() {
     escribirAlmacen('archivo:' + clave, editor.getValue());
     programarRevision(clave);
   });
+}
+
+// Atajo de Emmet de Visual Studio Code: "!" (o "html:5") seguido de Tab en un
+// archivo HTML genera el esqueleto del documento. Se reproduce tal cual, con
+// lang="en" y el título "Document": revisarlo es parte del ejercicio.
+const ESQUELETO_HTML = [
+  '<!DOCTYPE html>',
+  '<html lang="en">',
+  '<head>',
+  '    <meta charset="UTF-8">',
+  '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+  '    <title>Document</title>',
+  '</head>',
+  '<body>',
+  '    ',
+  '</body>',
+  '</html>',
+];
+
+function expandirEmmet(cm) {
+  if (cm.somethingSelected() || cm.getOption('readOnly') || cm.getOption('mode') !== 'htmlmixed') return false;
+  const cursor = cm.getCursor();
+  const linea = cm.getLine(cursor.line);
+  const m = linea.slice(0, cursor.ch).match(/^(\s*)(!|html:5)$/);
+  if (!m || linea.slice(cursor.ch).trim()) return false;
+  const sangria = m[1];
+  cm.replaceRange(ESQUELETO_HTML.map((l, i) => (i ? sangria : '') + l).join('\n'),
+    { line: cursor.line, ch: sangria.length }, { line: cursor.line, ch: linea.length });
+  cm.setCursor({ line: cursor.line + 8, ch: sangria.length + 4 });
+  return true;
 }
 
 function abrirArchivo(clave) {
