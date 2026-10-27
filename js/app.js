@@ -508,7 +508,13 @@ async function documentoSrcdoc(carpeta, pagina) {
   const etiquetaBase = doc.createElement('base');
   etiquetaBase.href = base.href;
   doc.head.prepend(etiquetaBase);
-  return (doc.doctype ? '<!DOCTYPE html>\n' : '') + doc.documentElement.outerHTML;
+  // Todos los nodos del documento, no solo <html>: el tipo de documento y los
+  // comentarios que haya antes o después también cuentan
+  return Array.from(doc.childNodes).map((n) => {
+    if (n.nodeType === Node.DOCUMENT_TYPE_NODE) return new XMLSerializer().serializeToString(n);
+    if (n.nodeType === Node.COMMENT_NODE) return '<!--' + n.data + '-->';
+    return n.outerHTML || '';
+  }).join('\n');
 }
 
 // Carga una página de un ejercicio en un marco, con el modo de vista activo
